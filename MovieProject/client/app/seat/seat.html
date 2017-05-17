@@ -1,0 +1,225 @@
+<style>
+.content
+{
+  background: white;
+  color: black;
+}
+#stone
+{
+display: none;
+}
+  #card
+  {
+    margin: 100px;
+   display: inline-block;
+   align: center;
+  }
+</style>
+<form>
+  <div>
+<table class="table table-condensed" >
+  <tr>
+    <th>Theatre City</th>
+    <th>Theatre Location</th>
+    <th>Theatre Name</th>
+    <th>Movie Name</th>
+    <th>Movie Date</th>
+    <th>Movie Time</th>
+  </tr>
+  <tr>
+<td><select ng-model="$ctrl.shivCity" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.theatreCity}}">{{shiv.theatreCity}}</option>
+</select></td>
+<br>
+
+<td><select ng-model="$ctrl.shivLocation" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.theatreLocation}}">{{shiv.theatreLocation}}</option>
+</select></td>
+
+<br>
+<td>
+<select ng-model="$ctrl.shivName" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.theatreName}}">{{shiv.theatreName}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.movieTitle" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.movieName}}">{{shiv.movieName}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.shivDate" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.movieDate}}">{{shiv.movieDate}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.shivTime" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMapping" value="{{shiv.movieTime}}">{{shiv.movieTime}}</option>
+</select></td>
+</tr>
+<br>
+</table>
+<button type="submit" class="btn btn-info" ng-click="$ctrl.addInfo()">Add Info</button>
+<button class="btn btn-danger" type="reset">Reset</button>
+<div>
+</form>
+
+
+<div ng-repeat="shiv in $ctrl.seat">
+  {{shiv.theatreCity}}
+{{shiv.theatreLocation}}
+{{shiv.theatreName}}
+{{shiv.movieName}}
+{{shiv.movieDate}}
+{{shiv.movieTime}}
+</div>
+<br>
+<script>
+   $(document).ready(function() {
+	 $("#button1").click(function() {
+       $('#stone').show();
+     	});
+	 });
+</script>
+click here to go seat booking : <input id="button1" class="btn btn-success" type="button" value="show" ng-model="myhidden">
+<br>
+<div id=stone>
+
+<div class ="content">
+<table class="table table-bordered" style="border-collapse: separate; border-spacing: 2px; margin-left: 30%;">
+  <tr>
+    <h3> ALL EYES THIS WAY PLEASE </h3>
+ </tr>
+ <div>
+   <img src="assets\images\seat_available.png" height="30" width="30">Available Seats
+   <img src="assets\images\seat_reserved.png" height="30" width="30" class="padding-left"> Already Booked
+   <img src="assets\images\seat_selected.png" height="30" width="30" class="padding-left"> Your Selected
+ </div>
+ <div>
+   <button type="button" class="btn btn-info btn-md" ng-click="$ctrl.showSelected()">Book Selected Seats</button>
+   <button type="button" class="btn btn-danger btn-md" ng-click="$ctrl.clearSelected()"> Remove Seat Selected </button>
+ </div>
+ <tr ng-repeat="row in rows">
+   <td class="padding-right" ng-bind="row"></td>
+   <td class="seat" ng-repeat="col in cols" ng-click="$ctrl.seatClicked(row + col)" ng-switch on="getStatus(row + col)">
+     <img ng-switch-when="selected" src="assets\images\seat_selected.png" height="35" width="35">
+     <img ng-switch-when="reserved" src="assets\images\seat_reserved.png" height="35" width="35">
+     <img ng-switch-default src="assets\images\seat_available.png" height="35" width="35">
+  </td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="padding-bottom" ng-repeat="col in cols track by $index" ng-blind="col"></td>
+</tr>
+
+</table>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <form class="form-horizontal span6">
+        <fieldset>
+          <legend>Payment</legend>
+
+          <div>
+            <img src=".\assets\images\express.png" height="50" width="150">
+            <img src=".\assets\images\visa.png" height="50" width="150">
+            <img src=".\assets\images\master.png" height="50" width="150">
+            <img src=".\assets\images\maestro.png" height="50" width="150">
+          </div>
+          <div class="control-group">
+            <label class="control-label"><span class="glyphicon glyphicon-edit"></span>Card Holder's Name</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" pattern="^[a-zA-Z0-9._-]+$" title="Enter the Name on card" required>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><span class="glyphicon glyphicon-credit-card"></span>Card Number</label>
+            <div class="controls">
+              <div class="row-fluid">
+                <div class="span3">
+                  <input type="text" class="input-block-level" pattern="^3(?:[47]\d([ -]?)\d{4}(?:\1\d{4}){2}|0[0-5]\d{11}|[68]\d{12})$|^4(?:\d\d\d)?([ -]?)\d{4}(?:\2\d{4}){2}$|^6011([ -]?)\d{4}(?:\3\d{4}){2}$|^5[1-5]\d\d([ -]?)\d{4}(?:\4\d{4}){2}$|^2014\d{11}$|^2149\d{11}$|^2131\d{11}$|^1800\d{11}$|^3\d{15}$" title="Enter you card number" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+              <input type="email" class="input-block-level" pattern="/^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z0-9.-]+$/i" title="enter your email example@domain.com" required>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><span class="glyphicon glyphicon-phone"></span>Mobile Number</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="+912345678901" title="Enter your mobile number" required>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><span class="glyphicon glyphicon-calendar"></span>Card Expiry Date</label>
+         <div class="controls">
+           <div class="row-fluid">
+             <div class="span9">
+               <select class="input-block-level">
+                 <option>January</option>
+                 <option>Febreory</option>
+                 <option>March</option>
+                 <option>April</option>
+                 <option>May</option>
+                 <option>June</option>
+                 <option>July</option>
+                 <option>Augest</option>
+                 <option>September</option>
+                 <option>October</option>
+                 <option>November</option>
+                 <option>December</option>
+               </select>
+
+               <select class="input-block-level">
+                 <option>2017</option>
+                 <option>2018</option>
+                 <option>2019</option>
+                 <option>2020</option>
+                 <option>2021</option>
+                 <option>2022</option>
+                 <option>2023</option>
+                 <option>2024</option>
+                 <option>2025</option>
+                 <option>2026</option>
+                 <option>2027</option>
+                 <option>2028</option>
+                 <option>2029</option>
+                 <option>2030</option>
+               </select>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="control-group">
+         <label class="control-label"><span class="glyphicon glyphicon-lock"></span>Card CVV</label>
+         <div class="controls">
+           <div class="row-fluid">
+             <div class="span3">
+               <input type="text" class="input-block-level" autocomplete="off" maxlength="3" pattern="^([0-9]{3,4})$" title="Three digits at back of your card" required>
+             </div>
+             <div class="span8">
+
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="form-actions">
+         <button type="submit" class="btn btn-primary">Submit</button>
+         <button type="button" class="btn">Cancel</button>
+       </div>
+     </fieldset>
+   </form>
+ </div>
+</div>

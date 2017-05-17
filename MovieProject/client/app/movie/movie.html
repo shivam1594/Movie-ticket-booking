@@ -1,0 +1,49 @@
+
+<style media="screen">
+th,  td{
+    border : 2px solid black;
+    box-sizing: padding-box;
+    text-align: center;
+
+  }
+
+table{
+  align-content: center;
+  margin-left: 10%;
+  width: 65%;
+}
+</style>
+
+<form>
+  <input type="text" class="form-control" placeholder="Enter Movie Name" ng-model="$ctrl.Title">
+  <input type="text" class="form-control" placeholder="Enter Movie Year" ng-model="$ctrl.Year">
+  <button type="button" class="btn btn-success btn-sm" ng-click="$ctrl.SearchMovie()">Search Movie <span class="glyphicon glyphicon-search"></span></button>
+
+</form>
+<table>
+  <tr>
+    <td>Movie Title:{{$ctrl.movieData.Title}}</td>
+    <td>Movie Year:{{$ctrl.movieData.Year}}</td>
+    <td>Movie Genre: {{$ctrl.movieData.Genre}}</td>
+    <td>Movie Poster: {{$ctrl.movieData.Poster}}</td>
+    <td><button type="submit" class="btn btn-primary" ng-click="$ctrl.addMovie()">Add Movie Details </button></td>
+ </tr>
+ </table>
+ <table>
+   <tr>
+     <th>Poster</th>
+     <th>Title</th>
+     <th>Year</th>
+     <th>Genre</th>
+     <th>Button</th>
+   </tr>
+   <br>
+   <tr ng-repeat="shiv in $ctrl.shivMovie">
+  <td><img src="{{shiv.Poster}}" height="200px" width="150px"></td>
+  <td>{{shiv.Title}}</td>
+  <td>{{shiv.Year}}</td>
+  <td>{{shiv.Genre}}</td>
+
+<td><button type="delete" class="btn btn-danger" ng-click="$ctrl.deleteMovie(shiv)"><span class="glyphicon glyphicon-trash"></span>delete</button></td>
+</tr>
+</table>

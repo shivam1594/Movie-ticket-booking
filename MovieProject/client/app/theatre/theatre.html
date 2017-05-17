@@ -1,0 +1,27 @@
+
+<style media="screen">
+th,  td{
+    border : 2px solid black;
+    box-sizing: padding-box;
+    text-align: center;
+
+  }
+
+</style>
+
+<form>
+  <input type="text" class="form-control"  placeholder="Enter theatre Name" ng-model="$ctrl.Name">
+  <input type="text" class="form-control"  placeholder="Enter theatre Location" ng-model="$ctrl.Location">
+  <input type="text"  class="form-control"  placeholder="Enter theatre City" ng-model="$ctrl.City">
+  <button type="submit" class="btn btn-primary" ng-click="$ctrl.addTheatre()">Add Movie Details </button>
+</form>
+
+  <table>
+<tr ng-repeat="shiv in $ctrl.shivTheatre">
+<td> theatre Name:{{shiv.Name}} </td>
+<td> theatre Location:{{shiv.Location}}</td>
+<td> theatre City: {{shiv.City}}</td>
+  <td><button type="button" class="btn btn-danger" ng-click="$ctrl.deleteTheatre(shiv)">Delete <span class="glyphicon glyphicon-trash"></span></button></td>
+</tr>
+</table>
+  </div>

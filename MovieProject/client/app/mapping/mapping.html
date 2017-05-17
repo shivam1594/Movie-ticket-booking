@@ -1,0 +1,58 @@
+<script type="text/javascript">
+ $( function(){
+   $("#datepicker").datepicker();
+ });
+</script>
+<form>
+  <div>
+<table class="table table-condensed">
+  <tr>
+    <th>Theatre city</th>
+    <th>Theatre Location</th>
+    <th>Theatre Name</th>
+    <th>Movie Name</th>
+    <th>Movie Date</th>
+    <th>Movie Time</th>
+  </tr>
+  <tr>
+    <td>
+<select ng-model="$ctrl.theatreCity" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivTheatre"| unique: 'shiv.City' value="{{shiv.City}}">{{shiv.City}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.theatreLocation" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivTheatre" | unique:'shiv.Location'|filter: {'theatreLocation' :$ctrl.theatreCity} value="{{shiv.Location}}">{{shiv.Location}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.theatreName" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivTheatre" | unique:'shiv.Name' |filter: {'theatreName' :$ctrl.theatreLocation} value="{{shiv.Name}}">{{shiv.Name}}</option>
+</select></td>
+<br>
+<td>
+<select ng-model="$ctrl.movieName" class="btn dropdown-toggle btn-select">
+<option ng-repeat="shiv in $ctrl.shivMovie" | unique:'shiv.Title' value="{{shiv.Title}}">{{shiv.Title}}</option>
+</select></td>
+<br>
+<td>
+<input id="datepicker" class="form-control" ng-model="$ctrl.movieDate"></td>
+<td>
+<input type="text" class="form-control" placeholder="Enter Time Slot" ng-model="$ctrl.movieTime">
+</input></td>
+</tr>
+
+</table>
+<button type="button" class="btn btn-info" ng-click="$ctrl.addData()">Add Details</button>
+<div>
+</form>
+
+<div ng-repeat="shiv in $ctrl.shivMapping">
+{{shiv.theatreCity}}
+{{shiv.theatreLocation}}
+{{shiv.theatreName}}
+  {{shiv.movieName}}
+  {{shiv.movieDate}}
+  {{shiv.movieTime}}
+  <button  type="button" class="btn btn-danger" ng-click="$ctrl.deleteThing(shiv)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+</div>

@@ -1,0 +1,20 @@
+.trt
+{
+margin-left: auto;
+margin-right: auto;
+width: 80%
+}
+img
+{
+height: 200px;
+width: 200px;
+display: block;
+}
+.shi
+{
+	height: 350px;
+	width: 350px;
+	display: inline-block;
+	margin-bottom: 10px
+
+}
